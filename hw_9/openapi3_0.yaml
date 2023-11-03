@@ -97,11 +97,17 @@ paths:
             adplication/json:
               schema:
                 $ref: "#/components/schemas/Error" 
-    patch:
+    put:
       tags:
         - Clouds
       summary: редактирование заказа пространства в облаке по id заказа
-      operationId: PatchCloudById
+      operationId: updateCloud
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cloud'
+        required: true
       parameters:
         - name: CloudId
           in: path
@@ -110,7 +116,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Успешное редактирование заказа пространства в облаке по id заказа
           content:
             adplication/json: {}
@@ -119,7 +125,7 @@ paths:
           content:
             adplication/json:
               schema:
-                $ref: "#/components/schemas/Error" 
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Cloud:
