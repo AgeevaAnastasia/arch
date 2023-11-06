@@ -1,0 +1,443 @@
+openapi: 3.0.1
+info:
+  title: API robot vaccuum cleaner
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api/v1
+paths:
+  /users:
+    get:
+      summary: Getting a list of users
+      tags: 
+        - Users
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Successful response with a users list
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Adding a new user to the list
+      tags: 
+        - Users
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      responses:
+        "200":
+          description: Successful response to adding a user into the users list
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/{idUser}:
+    get:
+      summary: Getting a new user by id
+      tags:
+        - Users
+      operationId: getUserById
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with a user ID
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"     
+    delete:
+      summary: Deleting a user by id
+      tags:
+        - Users
+      operationId: deleteUsertById
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response to deleting a user
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - Users
+      summary: Modificating a user by ID
+      operationId: updateUserById
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: User id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response to modificating a user
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /robots:
+    get:
+      summary: Getting a list with robots
+      tags: 
+        - Robots
+      operationId: getAllRobots
+      responses:
+        "200":
+          description: Successful response with a robots list
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robots"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Adding a robot into the robots list
+      tags: 
+        - Robots
+      operationId: createRobot
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot" 
+      responses:
+        "200":
+          description: Successful response to adding a robot
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /robots/{idRobot}:
+    get:
+      summary: Getting a robot by a robot id
+      tags:
+        - Robots
+      operationId: getRobotById
+      parameters:
+        - name: idRobot
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response to getting a robot by id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"     
+    delete:
+      summary: Deleting a robot by id
+      tags:
+        - Robots
+      operationId: deleteRobottById
+      parameters:
+        - name: Robot id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Succeessful answer to deleting a robot by id
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - Robots
+      summary: Modificating a robot by id
+      operationId: updateRobotById
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Robot'
+        required: true
+      parameters:
+        - name: idRobot
+          in: path
+          required: true
+          description: Robot id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful answer to modificating a robot
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /group:
+    post:
+      summary: Creating a new group
+      tags:
+       - Group
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUser'
+        required: true
+      responses:
+        '200':
+          description: Successful answer to creating a new group
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /group/{idGroup}:
+    get:
+      summary: Getting a group by id
+      tags:
+        - Group
+      operationId: getGroupById
+      parameters:
+        - name: idGroup
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful answer to getting a group by id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/GroupUser"
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Deleting a group by id
+      tags:
+        - Group
+      operationId: deleteGroupById
+      parameters:
+        - name: idGroup
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful answer to deleting a group by id
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - Group
+      summary: Modificating a group by id
+      operationId: updateGroupById
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUser'
+        required: true
+      parameters:
+        - name: idGroup
+          in: path
+          required: true
+          description: Group id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful answer to modificating a group by id
+          content:
+            adplication/json: {}
+        "default":
+          description: Other responses
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - login
+        - passwordHash
+        - email
+      properties:
+        id:
+          type: integer 
+          example: 1
+        login:
+          type: string
+          example: John
+        passwordHash:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: example@yahoo.com
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    Robot:
+      type: object
+      required:
+        - id
+        - model
+        - version
+        - status
+        - resourse
+        - fabricName
+        - ip
+        - groupUserId
+      properties:
+        id:
+          type: integer
+          example: 1
+        model:
+          type: string
+          example: 123f45
+        version:
+          type: string
+          example: f123
+        status:
+          type: string
+          example: {}
+        resourse:
+          type: integer
+          example: 34
+        fabricName:
+          type: string
+          example: hytrdhsdpo
+        ip:
+          type: string
+          example: 192.168.0.3
+        groupUserId:
+          type: integer
+          example: 1
+    Robots:
+      type: array
+      items:
+        $ref: "#/components/schemas/Robot"
+    GroupUser:
+      type: object
+      required:
+        - id
+        - idUser1
+        - idUser2
+        - idUser3
+      properties:
+        id:
+          type: integer
+          example: 1
+        idUser1:
+          type: integer
+          example: 1
+        idUser2:
+          type: integer
+          example: 1
+        idUser3:
+          type: integer
+          example: 1
+    Error:
+      type: object
+      required:
+        - codeError
+        - messageError
+      properties:
+        codeError:
+          type: string
+          example: 123f456
+          description: Error code
+        messageError:
+          type: string
+          example: error
